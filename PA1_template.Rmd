@@ -71,6 +71,8 @@ median(Sum_StepsDaily2$SumSteps)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+comment
+
 
 StepsData2$DayType  <- ifelse(weekdays(StepsData2$date)=="Saturday" | weekdays(StepsData2$date)=="Sunday","weekend","weekday")
 

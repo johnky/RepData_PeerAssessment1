@@ -219,6 +219,8 @@ median(Sum_StepsDaily2$SumSteps)</p>
 
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 
+<p>comment</p>
+
 <p>StepsData2$DayType  &lt;- ifelse(weekdays(StepsData2$date)==&ldquo;Saturday&rdquo; | weekdays(StepsData2$date)==&ldquo;Sunday&rdquo;,&ldquo;weekend&rdquo;,&ldquo;weekday&rdquo;)</p>
 
 <p>toplot &lt;- aggregate(newsteps ~ DayType * interval, data=StepsData2, FUN=mean)</p>
