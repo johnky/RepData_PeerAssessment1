@@ -149,11 +149,9 @@ xyplot( newsteps ~ interval | DayType, toplot, layout = c(1, 2), type = "l",  yl
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
+
 There are Differences between weekdays and weekends.
 - Much more activity in the early mornings for weekdays
 - More activity throughout the whole day on Weekends since most people sit around at a job during the weekday
 - Weekends still have activity at night where the weekdays just tapers off
-
-
-
 
