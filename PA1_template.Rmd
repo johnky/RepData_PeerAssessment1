@@ -1,10 +1,13 @@
+---
 title: "Reproducible Research: Peer Assessment 1"
 output: html_document
 keep_md: true
+---
 
 
 ## Loading and preprocessing the data
 
+```{r}
 StepsData <- read.csv("activity.csv")
 
 StepsData$date <- as.Date(StepsData$date)
@@ -15,7 +18,7 @@ colnames(Sum_StepsDaily) <- c("date", "SumSteps")
 
 AVG_StepsInterval <- aggregate(steps~interval, data=StepsData, mean, na.rm=TRUE)
 colnames(AVG_StepsInterval) <- c("interval", "AvgSteps")
-
+````
 
 ## What is mean total number of steps taken per day?
 
