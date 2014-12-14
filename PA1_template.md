@@ -5,7 +5,11 @@ keep_md: true
 ---
 
 
+
+
 ## Loading and preprocessing the data
+
+The activity.csv file will be loaded and several matrixes will be set up
 
 
 ```r
@@ -13,13 +17,16 @@ StepsData <- read.csv("activity.csv")
 
 StepsData$date <- as.Date(StepsData$date)
 
-Sum_StepsDaily <- aggregate(steps~date, data=StepsData, sum, na.rm=TRUE)
 
+Sum_StepsDaily <- aggregate(steps~date, data=StepsData, sum, na.rm=TRUE)
 colnames(Sum_StepsDaily) <- c("date", "SumSteps")
+
 
 AVG_StepsInterval <- aggregate(steps~interval, data=StepsData, mean, na.rm=TRUE)
 colnames(AVG_StepsInterval) <- c("interval", "AvgSteps")
 ```
+
+
 
 ## What is mean total number of steps taken per day?
 
@@ -46,6 +53,8 @@ median(Sum_StepsDaily$SumSteps)
 ## [1] 10765
 ```
 
+
+
 ## What is the average daily activity pattern?
 
 
@@ -70,6 +79,9 @@ AVG_StepsInterval[which.max(AVG_StepsInterval$AvgSteps), ]$interval
 ```
 ## [1] 835
 ```
+
+
+
 
 ## Imputing missing values
 
@@ -112,7 +124,9 @@ median(Sum_StepsDaily2$SumSteps)
 ## [1] 10762
 ```
 
-##4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values ##differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
+The changing of the NA data to a value seems to have caused the mean and median to shift down just a little bit.
+Since you are addding in more points of data and then averaging I can see where this happens.  When you go from 20 values being average to 30 values average where the 10 new values are small numbers this will cause the overall mean to go down.
+
 
 
 
@@ -130,7 +144,16 @@ toplot <- aggregate(newsteps ~ DayType * interval, data=StepsData2, FUN=mean)
 
 
 library(lattice)
-xyplot( newsteps ~ interval | DayType, toplot, layout = c(1, 2), type = "l")
+xyplot( newsteps ~ interval | DayType, toplot, layout = c(1, 2), type = "l",  ylab ="Number of Steps")
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+
+There are Differences between weekdays and weekends.
+- Much more activity in the early mornings for weekdays
+- More activity throughout the whole day on Weekends since most people sit around at a job during the weekday
+- Weekends still have activity at night where the weekdays just tapers off
+
+
+
+
