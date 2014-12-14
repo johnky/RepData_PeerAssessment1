@@ -60,16 +60,27 @@ Calculate and report the total number of missing values in the dataset
 
 ```{r}
 sum(is.na(StepsData$steps))
+```
 
+Change the missing values to the average steps for that time interval
 
+```{r}
 StepsData2 <- merge(StepsData, AVG_StepsInterval, by="interval")
 StepsData2$newsteps <- ifelse(is.na(StepsData2$steps), round(StepsData2$AvgSteps), StepsData2$steps )
+```
 
+
+Create a sum of the Steps by Date
+```{r}
 Sum_StepsDaily2 <- aggregate(newsteps~date, data=StepsData2, sum, na.rm=TRUE)
 colnames(Sum_StepsDaily2) <- c("date", "SumSteps")
 
 hist(Sum_StepsDaily2$SumSteps, xlab ="Number of Steps", main ="Histogram of steps taken each day")
+```
 
+
+What is the Mean and Median of new steps
+```{r}
 mean(Sum_StepsDaily2$SumSteps)
 
 median(Sum_StepsDaily2$SumSteps)
@@ -77,7 +88,6 @@ median(Sum_StepsDaily2$SumSteps)
 
 The changing of the NA data to a value seems to have caused the mean and median to shift down just a little bit.
 Since you are addding in more points of data and then averaging I can see where this happens.  When you go from 20 values being average to 30 values average where the 10 new values are small numbers this will cause the overall mean to go down.
-
 
 
 

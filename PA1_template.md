@@ -96,17 +96,28 @@ sum(is.na(StepsData$steps))
 ## [1] 2304
 ```
 
+Change the missing values to the average steps for that time interval
+
+
 ```r
 StepsData2 <- merge(StepsData, AVG_StepsInterval, by="interval")
 StepsData2$newsteps <- ifelse(is.na(StepsData2$steps), round(StepsData2$AvgSteps), StepsData2$steps )
+```
 
+
+Create a sum of the Steps by Date
+
+```r
 Sum_StepsDaily2 <- aggregate(newsteps~date, data=StepsData2, sum, na.rm=TRUE)
 colnames(Sum_StepsDaily2) <- c("date", "SumSteps")
 
 hist(Sum_StepsDaily2$SumSteps, xlab ="Number of Steps", main ="Histogram of steps taken each day")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+
+
+What is the Mean and Median of new steps
 
 ```r
 mean(Sum_StepsDaily2$SumSteps)
@@ -130,7 +141,6 @@ Since you are addding in more points of data and then averaging I can see where 
 
 
 
-
 ## Are there differences in activity patterns between weekdays and weekends?
 
 
@@ -147,7 +157,7 @@ library(lattice)
 xyplot( newsteps ~ interval | DayType, toplot, layout = c(1, 2), type = "l",  ylab ="Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
 
 
 There are Differences between weekdays and weekends.
